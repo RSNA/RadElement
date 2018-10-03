@@ -1,0 +1,141 @@
+body, html {
+	margin: 0px;
+	padding: 0px;
+	color: black;
+	background-color: white;
+}
+
+body, input, textarea, select, option {
+	font-family: verdana, arial, helvetica, sans-serif;
+	font-size:14px;
+}
+#navigation {
+	padding:3px 20px 3px 3px;
+	text-align:right;
+	font-size:10px;
+	clear: both;
+}
+#head1 {
+	background-color: #3399FF;
+	padding:3px;
+	clear: both;
+}
+#identify {
+	margin: 0px;
+	/* padding: 10px 10px 10px 20px; */
+	font-size: 36px;
+	vertical-align:top;
+}
+#head2 {
+	background-color: #FFCC33;
+	padding:2px;
+	clear:both;
+}
+a {
+	color: #3399FF;
+	text-decoration:none;
+}
+a:hover {
+	text-decoration:underline;
+}
+table#bordered {
+	border: solid 2px #3399FF;
+	border-collapse: collapse;
+	margin: 1em;
+	padding: 1em;
+	background-color: #ffffff;
+}
+.logo {
+	margin-left: 1em;
+	
+}
+td {
+	padding:5px;
+	vertical-align:top;
+}
+th {
+	background-color:#eeeeee;
+	padding:5px;
+}
+th.left {
+	text-align:left;
+}
+th.right {
+	text-align:right;
+}
+tr.underline td {
+	border-bottom:1px #cccccc solid;
+}
+tr.underline:hover {
+	background-color: #eeeeee;
+}
+#viewxmlelements {
+	float:right;
+	padding-left:10px;
+}
+#footer1 {
+	background-color: #3399FF;
+	padding:4px;
+	clear: both;
+}
+#footer2 {
+	background-color: #FFCC33;
+	padding:3px;
+	clear: both;
+}
+#copyright {
+	padding:3px;
+}
+#footerdb {
+	position: relative;
+	font-size: 50%;
+	width: 100%;
+	text-align: right;
+	clear: both;
+}
+div#branding {
+	  margin-left: 120px;
+      width : 400px;
+      height : 20px;
+      background-color : white;
+}
+p {
+	font-size:12px;
+}
+
+.searchbox {
+	/*height: 54px;*/
+	padding-top:4px;
+	/*text-align: center;*/
+	vertical-align: center;
+}
+.searchbox input {
+	vertical-align:middle;
+	height:36px;
+	font-size:24px;
+	background-color:#ffffff;
+	border:1px solid #3399FF;
+	text-indent:3px;
+}
+.rtl {
+  direction: rtl;
+  /*unicode-bidi: embed;*/
+}
+#metrics {
+/* used in sync */
+	display: block;
+	float: right;
+	margin-top:2px;
+	text-align: center;
+
+}
+#metricsborder {
+/* used in sync */
+		border: solid 2px #3399FF;
+	border-collapse: collapse;
+	border-collapse: collapse;
+	margin: 1em;
+	padding: 1em;	
+	text-align: center;
+	width: 150px;		
+}

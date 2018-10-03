@@ -1,0 +1,163 @@
+    /* Override some defaults */
+    html, body {
+		background-color: #eee;
+    }
+    
+	body {
+		padding-top: 40px; /* 40px to make the container go all the way to the bottom of the topbar */
+    }
+    
+	.container > footer p {
+		text-align: center; /* center align it with the container */
+    }
+    
+	.container {
+        width: 820px; 
+      }
+	  
+      /* The white background content wrapper */
+    .container > .content {
+        background-color: #fff;
+        padding: 20px;
+        margin: 0 -20px; /* negative indent the amount of the padding to maintain the grid system */
+        -webkit-border-radius: 0 0 6px 6px;
+           -moz-border-radius: 0 0 6px 6px;
+                border-radius: 0 0 6px 6px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.15);
+                box-shadow: 0 1px 2px rgba(0,0,0,.15);
+    }
+
+      /* Page header tweaks */
+    .page-header {
+        background-color: #ffffff;
+        padding: 20px 20px 0px;
+        margin: -20px -20px 20px;
+		border-bottom: 0;
+    }
+
+    .topbar .btn {
+        border: 0;
+    }
+	  
+	.tab-content {
+		border-right: 1px solid #ddd;
+		border-bottom: 1px solid #ddd;
+		border-left: 1px solid #ddd;
+		padding: 10px;
+		margin:0;
+	}
+	  
+	.tabs {
+		margin-bottom:0;
+	}
+
+	a {
+	  color: #4c3482;
+	}
+	  
+	.popover .inner {
+		background: #999999;
+	}
+	  
+	.rtl {
+		direction: rtl;
+		text-align: right;
+	}
+		
+	#searchResults {
+		display:none;
+	}
+	
+	h4 {
+		line-height:22px;
+	}
+	.indent {
+		margin-left:10px;
+	}
+
+	li {
+	  line-height: 18px;
+	  color: #000000;
+	}	
+	.floatRight {
+		float:right;
+	}
+	.centerText {
+		text-align: center;
+	}
+	.rightText {
+		text-align: right;
+	}
+	.hangingindent {
+		padding-left: 22px ;
+		text-indent: -22px ;
+	}
+	.well.lightpurple {
+		background-color: #eeeeff;
+	}
+	.pills  {
+		text-align: center;
+	}
+
+	table {
+		margin-bottom: 0;
+	}
+	table td {
+	  vertical-align: top;
+	  border-top: none;
+	  
+	}
+	td.nopad {
+		padding:0;
+	}
+	.big {
+	  font-size: 16px;
+	  line-height: 22px;
+	}	
+	.specialtyIcon {
+		float:left;
+		padding:0 10px 10px 15px;
+	}	
+	.specialtyCode {
+		float:left;
+		width: 36px;			
+		padding:3px;
+		/*border: 1px solid #666666;*/
+		margin-left: 10px;
+		background-color: #dedede;
+		color: #666666;
+		font-size: 24px;
+		line-height: 34px;		
+	}	
+	.orgIcon {
+		float:left;
+		padding:0 10px 10px 25px;
+	}		
+	.orgCode {
+		float:left;
+		padding:5px;
+		width:70px;
+		border: 1px solid #517ab8;
+		background-color: #4677c7;
+		background-image: linear-gradient(#4677c7, #375c96);
+		color: #ffffff;
+		font-size: 16px;			
+	}
+	.langIcon {
+		float:left;
+		padding:0 10px 10px 25px;	
+	}
+	.langCode {
+		float:left;
+		width: 30px;
+		padding:5px;
+		border: 2px solid #5e4674;
+		background-color: #81619f;
+		color: #ffffff;
+		font-size: 20px;		
+		line-height: 24px;
+	}
+	.label {
+		background-color: #dedede;
+	}

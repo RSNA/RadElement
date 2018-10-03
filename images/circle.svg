@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="16"
+   height="16"
+   id="svg2"
+   version="1.1"
+   inkscape:version="0.48.1 "
+   inkscape:export-filename="C:\radreport\test\Partial.png"
+   inkscape:export-xdpi="89.917213"
+   inkscape:export-ydpi="89.917213"
+   sodipodi:docname="New document 1">
+  <defs
+     id="defs4" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="32"
+     inkscape:cx="6.496138"
+     inkscape:cy="7.7380067"
+     inkscape:document-units="px"
+     inkscape:current-layer="g3755"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1018"
+     inkscape:window-x="-8"
+     inkscape:window-y="-8"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-1036.3622)">
+    <path
+       sodipodi:type="arc"
+       style="fill:#ffffff;stroke:#3399ff"
+       id="path3753"
+       sodipodi:cx="8.2366076"
+       sodipodi:cy="8.1316967"
+       sodipodi:rx="7.4044328"
+       sodipodi:ry="7.5687027"
+       d="m 15.64104,8.1316967 a 7.4044328,7.5687027 0 1 1 -14.80886522,0 7.4044328,7.5687027 0 1 1 14.80886522,0 z"
+       transform="matrix(1.0127894,0,0,0.99080795,-0.34194859,1036.3053)" />
+  </g>
+  <g
+     transform="translate(0,-1036.3622)"
+     id="g3755"
+     inkscape:groupmode="layer"
+     inkscape:label="Layer 1 copy">
+    <path
+       transform="matrix(1.0127894,0,0,0.99080795,-0.34194859,1036.3053)"
+       d="m 15.64104,8.1316967 c 0,4.1800793 -3.315077,7.5687023 -7.4044324,7.5687023 -4.0893554,0 -7.40443282,-3.388623 -7.40443282,-7.5687023 0,-4.1800791 3.31507742,-7.5687027 7.40443282,-7.5687027 4.0893554,0 7.4044324,3.3886236 7.4044324,7.5687027 z"
+       sodipodi:ry="7.5687027"
+       sodipodi:rx="7.4044328"
+       sodipodi:cy="8.1316967"
+       sodipodi:cx="8.2366076"
+       id="path3757"
+       style="fill:#3399ff;stroke:#3399ff"
+       sodipodi:type="arc"
+       inkscape:export-filename="C:\radreport\test\Exact.png"
+       inkscape:export-xdpi="89.917213"
+       inkscape:export-ydpi="89.917213" />
+  </g>
+</svg>

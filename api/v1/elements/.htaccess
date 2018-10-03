@@ -1,0 +1,5 @@
+RewriteEngine On # Turn on the rewriting engine 
+RewriteRule ^RDE([0-9]+)/values/?(.*)$ element-values.php?_id=$1&_param=$2&%{QUERY_STRING} [NC]
+RewriteRule ^RDE([0-9]+)/codes/?(.*)$ element-codes.php?_id=$1&_param=$2&%{QUERY_STRING} [NC]
+RewriteRule ^RDE([0-9]+)/sets/?(.*)$ element-sets.php?_id=$1&_param=$2&%{QUERY_STRING} [NC]
+RewriteRule ^RDE([0-9]+)(/(.*))?$ elements.php?_id=$1&_param=$2&%{QUERY_STRING} [NC,L] # Process all

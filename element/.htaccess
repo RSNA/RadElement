@@ -1,0 +1,2 @@
+RewriteEngine On # Turn on the rewriting engine 
+RewriteRule ^RDE([0-9]+)/?$ ?id=$1 [NC,L]

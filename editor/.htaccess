@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "CDE Editor - Authorized Users Only"
+AuthUserFile /var/www/radelement/editor/.htpasswd
+Require valid-user
