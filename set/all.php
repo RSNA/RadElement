@@ -1,13 +1,13 @@
 <?php
 /*
 	set/all.php
-	
+
 	RadElement -- List all sets
 	CEK 2016-06-22
 */
 
 	include ('../config/open_db.php');
-	
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -19,7 +19,7 @@
 </head>
 
 <body>
-<?php 
+<?php
 include_once("../config/analyticstracking.php");
 echo $topbar;
 ?>
@@ -29,24 +29,39 @@ echo $topbar;
 <hr>
 <ul style="font-size: 14pt; line-height: 150%;">
 <?php
+
 	$result = mysql_query (
-		"SELECT ElementSet.*, count(*) AS numElements
-			FROM ElementSet, ElementSetRef
-			WHERE ElementSet.id = elementSetID
-			GROUP BY ElementSet.id
-			ORDER BY ElementSet.name") 
-		or die(mysql_error());
-		
+		"SELECT Organization.`name` as orgName,
+                Organization.abbreviation as orgAbbreviation,
+                OrganizationRoleElementSetRef.role as orgRole,
+                ElementSet.*,
+                count(*) as numElements
+         FROM Organization
+         JOIN OrganizationRoleElementSetRef on OrganizationRoleElementSetRef.organizationID = Organization.ID
+         JOIN ElementSet on ElementSet.ID = OrganizationRoleElementSetRef.elementSetID
+         JOIN ElementSetRef on ElementSetRef.elementSetID = ElementSet.ID
+         GROUP BY Organization.name, ElementSet.ID
+         ORDER BY FIELD(orgAbbreviation, 'ACR', 'ACR-DSI', 'ASNR', 'RSNA', 'Other')")
+		 or die(mysql_error());
+
 	if (mysql_num_rows ($result) == 0) {
 		header ("Location: /");
 		exit;
 	}
 
+	$currentOrgName = '';
 	while ($row = mysql_fetch_assoc ($result)) {
 		extract ($row);
+
+		// Print organization header if it's new
+		if ($currentOrgName != $orgName) {
+			print "</br><h3>$orgName</h3>";
+			$currentOrgName = $orgName;
+		}
 		$s = ($numElements > 1 ? 's' : '');
-		print "<li style=\"font-size: 14pt; line-height: 130%;\"><a href=\"/set/RDES$id\">$name</a> &nbsp; <span style=\"font-size:10pt;\">($numElements element$s)</span></li>\n";
+		print "<li style=\"font-size: 14pt; line-height: 130%; list-style: none;\"><a href=\"/set/RDES$id\">$name</a> &nbsp; <span style=\"font-size:10pt;\">($numElements element$s)</span></li>\n";
 	}
+
 ?>
 </ul>
 <?php echo $footer; ?>
