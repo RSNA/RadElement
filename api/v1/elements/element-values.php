@@ -83,9 +83,9 @@
 		$result = mysql_query (
 				"SELECT system, code, display,
 						CONCAT('$baseURL/codes/',system,'/',code) AS url
-					FROM Code, CodeRef
+					FROM IndexCode, IndexCodeElementRef
 					WHERE elementID = $id AND valueCode = '$_param'
-					AND Code.id = codeID
+					AND IndexCode.id = codeID
 					ORDER BY system, code");
 		while ($row = mysql_fetch_assoc ($result)) {
 			$response['codes'] [] = $row;

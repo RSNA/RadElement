@@ -149,29 +149,29 @@
 		}
 		print "</ul>\n";
 	}
-	
+
 	// Display indexing codes
 	print "<br>
 <h3><a href=element-codes.php?id=$id>Indexing codes</a></h3>
 <ul>
 ";
 
-	$result = mysql_query ("SELECT system, code, display FROM Code, CodeRef
+	$result = mysql_query ("SELECT system, code, display FROM IndexCode, CodeRef
 							WHERE elementID = $id AND valueCode IS NULL
-							AND Code.id = codeID
+							AND IndexCode.id = codeID
 							ORDER BY system, code");
 	while ($row = mysql_fetch_assoc ($result)) {
 		extract ($row);
 		print "<li>$system::$code : $display</li>\n";
 	}
 	print "</ul>\n";
-	
+
 	// Display the element's sets
 	print "<br>
 <h3><a href=element-sets.php?id=$id>Sets</a></h3>
 <ul>
 ";
-	$result = mysql_query ("SELECT elementSetID, name 
+	$result = mysql_query ("SELECT elementSetID, name
 							FROM ElementSetRef, ElementSet
 							WHERE elementID = $id
 							AND ElementSet.id = elementSetID

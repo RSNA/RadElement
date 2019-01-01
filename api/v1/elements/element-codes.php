@@ -32,7 +32,7 @@
 
     // Provide information about codes
     $numCodes = mysql_num_rows (mysql_query (
-                    "SELECT * FROM CodeRef WHERE elementID = $id"));
+                    "SELECT * FROM IndexCodeElementRef WHERE elementID = $id"));
 
     // Tally codes for the specified element
     $limit = (ctype_digit($limit) ? min(0+$limit,100) : 20);
@@ -41,9 +41,9 @@
     $result = mysql_query (
             "SELECT DISTINCT system, code, display,
                         CONCAT('$baseURL','/codes/',system,'/',code) AS url
-                FROM CodeRef, Code
+                FROM IndexCodeElementRef, IndexCode
                 WHERE elementID = $id AND valueCode IS NULL
-                AND CodeRef.codeID = Code.id
+                AND IndexCodeElementRef.codeID = IndexCode.id
                 ORDER BY system, code
                 LIMIT $limit OFFSET $offset")
         or die(mysql_error());
@@ -58,7 +58,7 @@
     $response ['codes'] = $codes;
 
     // Tally total number of codes
-    $totalCount = mysql_num_rows (mysql_query ("SELECT * FROM CodeRef
+    $totalCount = mysql_num_rows (mysql_query ("SELECT * FROM IndexCodeElementRef
                     WHERE elementID = $id AND valueCode IS NULL"));
     $response ['query']['totalCount'] = $totalCount;
 

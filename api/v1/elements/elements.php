@@ -116,9 +116,9 @@
                 $code_result = mysql_query (
                     "SELECT system, code, display,
                         CONCAT('$baseURL/codes/', system, '/', code) AS url
-                        FROM CodeRef, Code
+                        FROM IndexCodeElementRef, IndexCode
                         WHERE elementID = $id AND valueCode = '$valueCode'
-                        AND CodeRef.codeID = Code.id
+                        AND IndexCodeElementRef.codeID = IndexCode.id
                         GROUP BY system, code");
                 while ($code_row = mysql_fetch_assoc ($code_result)) {
                     $codes [] = $code_row;
@@ -166,9 +166,9 @@
         $result = mysql_query (
             "SELECT DISTINCT system, code, display,
                         CONCAT('$baseURL','/codes/',system,'/',code) AS url
-                FROM CodeRef, Code
+                FROM IndexCodeElementRef, IndexCode
                 WHERE elementID = $id AND valueCode IS NULL
-                AND CodeRef.codeID = Code.id
+                AND IndexCodeElementRef.codeID = IndexCode.id
                 ORDER BY system, code")
                     or die(mysql_error());
 

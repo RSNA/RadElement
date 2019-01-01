@@ -141,11 +141,11 @@ echo $topbar;
     // Display indexing codes
     $result = mysql_query (
                 "SELECT system, code, display, codeURL
-                 FROM CodeRef, Code, CodeSystem
-                 WHERE CodeRef.elementID = $elementID
-                 AND CodeRef.valueCode IS NULL
-                 AND CodeRef.codeID = Code.id
-                 AND Code.system = CodeSystem.abbrev
+                 FROM IndexCodeElementRef, IndexCode, IndexCodeSystem
+                 WHERE IndexCodeElementRef.elementID = $elementID
+                 AND IndexCodeElementRef.valueCode IS NULL
+                 AND IndexCodeElementRef.codeID = IndexCode.id
+                 AND IndexCode.system = IndexCodeSystem.abbrev
                  ORDER BY system, code") or die(mysql_error());
     if (mysql_num_rows ($result) > 0) {
         print "<tr><td>Index codes:</td><td>\n";

@@ -60,13 +60,13 @@
 
 	$result = mysql_query (
 		"SELECT ElementValue.id AS valueID, ElementValue.code, ElementValue.name,
-			GROUP_CONCAT(CONCAT(Code.system,'::',Code.code,' - ',Code.display) 
+			GROUP_CONCAT(CONCAT(IndexCode.system,'::',IndexCode.code,' - ',IndexCode.display)
 							SEPARATOR '<br>') AS codelist
 			FROM ElementValue
-			LEFT JOIN (CodeRef, Code)
-				ON (CodeRef.elementID = $elementID
-					AND CodeRef.valueCode = ElementValue.code
-					AND CodeRef.codeID = Code.id)
+			LEFT JOIN (IndexCodeRef, IndexCode)
+				ON (IndexCodeRef.elementID = $elementID
+					AND IndexCodeRef.valueCode = ElementValue.code
+					AND IndexCodeRef.codeID = IndexCode.id)
 			WHERE ElementValue.elementID = $elementID
 			GROUP BY ElementValue.id");
 

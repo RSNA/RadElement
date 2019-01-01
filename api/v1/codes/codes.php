@@ -54,7 +54,7 @@
         $result = mysql_query (
                 "SELECT abbrev AS system, name,
                         CONCAT('$baseURL/codes/',abbrev) AS url
-                    FROM CodeSystem
+                    FROM IndexCodeSystem
                     ORDER BY abbrev")
             or die(mysql_error());
 
@@ -74,7 +74,7 @@
 
         // Retrieve details about coding system
         $result = mysql_query ("SELECT abbrev, name, oid, systemURL
-                FROM CodeSystem WHERE abbrev = '$system' LIMIT 1")
+                FROM IndexCodeSystem WHERE abbrev = '$system' LIMIT 1")
             or die(mysql_error());
 
         if (mysql_num_rows ($result) == 0) {
@@ -91,7 +91,7 @@
         $result = mysql_query (
                 "SELECT code, display,
                         CONCAT('$baseURL/codes/$system/',code) AS url
-                    FROM Code
+                    FROM IndexCode
                     WHERE system = '$system'
                     ORDER BY code
                     LIMIT $limit OFFSET $offset")
@@ -108,7 +108,7 @@
 
         // Tally total number of codes
         $totalCount = mysql_num_rows (mysql_query (
-                        "SELECT * FROM Code WHERE system = '$system'"));
+                        "SELECT * FROM IndexCode WHERE system = '$system'"));
         $response ['query']['totalCount'] = $totalCount;
 
         // Point to next set of elements
@@ -126,7 +126,7 @@
     else {
 
         // Make sure it's a valid coding system; get the codeURL
-        $result = mysql_query ("SELECT codeURL FROM CodeSystem WHERE abbrev = '$system' LIMIT 1")
+        $result = mysql_query ("SELECT codeURL FROM IndexCodeSystem WHERE abbrev = '$system' LIMIT 1")
             or die(mysql_error());
 
         if (mysql_num_rows ($result) == 0) {
@@ -140,7 +140,7 @@
         extract (mysql_fetch_assoc ($result));
 
         // Make sure it's a valid code;  get the codeID
-        $result = mysql_query ("SELECT id as codeID, display FROM Code
+        $result = mysql_query ("SELECT id as codeID, display FROM IndexCode
                                 WHERE system = '$system' AND code = '$code' LIMIT 1")
             or die(mysql_error());
 
@@ -169,11 +169,11 @@
 
             // List the elements indexed by the specified system + code
             $numElements = mysql_num_rows (mysql_query (
-                    "SELECT elementID FROM CodeRef
+                    "SELECT elementID FROM IndexCodeElementRef
                         WHERE codeID = $codeID
                         AND valueCode IS NULL"));
             $numValues = mysql_num_rows (mysql_query (
-                    "SELECT elementID, valueCode FROM CodeRef
+                    "SELECT elementID, valueCode FROM IndexCodeElementRef
                         WHERE codeID = $codeID
                         AND valueCode IS NOT NULL"));
 
@@ -196,12 +196,12 @@
         else if ($item == 'elements') {
 
             $result = mysql_query (
-                "SELECT CONCAT('RDE', CodeRef.elementID) AS id, Element.name,
-                            CONCAT('$baseURL/elements/RDE', CodeRef.elementID) AS url
-                        FROM CodeRef, Element
+                "SELECT CONCAT('RDE', IndexCodeElementRef.elementID) AS id, Element.name,
+                            CONCAT('$baseURL/elements/RDE', IndexCodeElementRef.elementID) AS url
+                        FROM IndexCodeElementRef, Element
                         WHERE codeID = $codeID
-                        AND Element.id = CodeRef.elementID
-                        AND CodeRef.valueCode IS NULL
+                        AND Element.id = IndexCodeElementRef.elementID
+                        AND IndexCodeElementRef.valueCode IS NULL
                         ORDER BY elementID
                         LIMIT $limit OFFSET $offset")
                 or die(mysql_error());
@@ -219,9 +219,9 @@
             // Tally total number of elements
             $totalCount = mysql_num_rows (mysql_query (
                     "SELECT DISTINCT elementID
-                        FROM Code, CodeRef
+                        FROM IndexCode, IndexCodeElementRef
                         WHERE system = '$system' and code = '$code'
-                        AND Code.id = codeID
+                        AND IndexCode.id = codeID
                         AND valueCode IS NULL"));
             $response ['query']['totalCount'] = $totalCount;
 
@@ -239,17 +239,17 @@
         else if ($item == 'values') {
 
             $result = mysql_query (
-                "SELECT CONCAT('RDE', CodeRef.elementID) AS id,
+                "SELECT CONCAT('RDE', IndexCodeElementRef.elementID) AS id,
                         valueCode AS code,
                         ElementValue.name,
-                        CONCAT('$baseURL/elements/RDE', CodeRef.elementID,
-                                    '/values/', CodeRef.valueCode) AS url
-                    FROM CodeRef, Element, ElementValue
+                        CONCAT('$baseURL/elements/RDE', IndexCodeElementRef.elementID,
+                                    '/values/', IndexCodeElementRef.valueCode) AS url
+                    FROM IndexCodeElementRef, Element, ElementValue
                     WHERE codeID = $codeID
-                    AND CodeRef.elementID = Element.id
-                    AND CodeRef.valueCode = ElementValue.code
-                    AND CodeRef.elementID = ElementValue.elementID
-                    ORDER BY CodeRef.elementID, CodeRef.valueCode
+                    AND IndexCodeElementRef.elementID = Element.id
+                    AND IndexCodeElementRef.valueCode = ElementValue.code
+                    AND IndexCodeElementRef.elementID = ElementValue.elementID
+                    ORDER BY IndexCodeElementRef.elementID, IndexCodeElementRef.valueCode
                     LIMIT $limit OFFSET $offset")
                 or die(mysql_error());
 
@@ -266,7 +266,7 @@
             // Tally total number of values
             $totalCount = mysql_num_rows (mysql_query (
                     "SELECT DISTINCT elementID, valueCode
-                        FROM CodeRef
+                        FROM IndexCodeElementRef
                         WHERE codeID = $codeID
                         AND valueCode IS NOT NULL"));
             $response ['query']['totalCount'] = $totalCount;

@@ -40,18 +40,18 @@
 		header ("Location: element-codes.php?id=$elementID");
 		exit;
 	}
-	
+
 	// Action: ADD
 	if (strcmp ($action, "add") == 0) {
 		foreach ($new as $n => $on) {
 			list ($system, $code, $display) = explode ("|", $new_info[$n]);
-			$result = mysql_query ("SELECT id AS codeID FROM Code
+			$result = mysql_query ("SELECT id AS codeID FROM IndexCode
 						WHERE system = '$system' AND code = '$code' LIMIT 1");
 			if (mysql_num_rows ($result) > 0) {
 				extract (mysql_fetch_assoc ($result));
 			}
 			else {
-				mysql_query ("INSERT INTO Code (system, code, display)
+				mysql_query ("INSERT INTO IndexCode (system, code, display)
 								VALUES ('$system', '$code', '$display')");
 				$codeID = mysql_insert_id ();
 			}
@@ -72,11 +72,11 @@
 ";
 
 	// Display the element's current codes
-	$result = mysql_query ("SELECT CodeRef.id AS codeRefID, system, code, display 
-						FROM CodeRef, Code
+	$result = mysql_query ("SELECT CodeRef.id AS codeRefID, system, code, display
+						FROM CodeRef, IndexCode
 						WHERE elementID = $elementID
 						AND valueCode IS NULL
-						AND Code.id = codeID
+						AND IndexCode.id = codeID
 						ORDER BY display");
 	print "<ul>\n";
 	while ($row = mysql_fetch_assoc ($result)) {
