@@ -98,8 +98,6 @@ echo $topbar;
         print_info ('Maximum', $valueMax);
         print_info ('Step', $stepValue);
         print_info ('Units', $unit);
-        // print_info ('Minimum cardinality', $minCardinality);
-        // print_info ('Maximum cardinality', $maxCardinality);
     }
 
     // Display other metadata

@@ -17,7 +17,7 @@
 <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-touch-icon-72x72.png">
 <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-touch-icon-114x114.png">
 <style> ul li a{ color:#005DAB !important}</style>
-<?php 
+<?php
 //grab the current browser URL
   $page_name=pathinfo($_SERVER['PHP_SELF'],PATHINFO_DIRNAME);
 
@@ -29,7 +29,7 @@ $topbar = '<div class="topbar">
    <a class="brand" href="/">RadElement.org</a>
    <div align="right" style="float:right; margin:10px">
     <a href="/about/">About this site</a>
-	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; 
+	&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;
     <a href="/doc/">API Documentation</a>
    </div>
   </div>

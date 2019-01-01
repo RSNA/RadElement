@@ -16,10 +16,10 @@
 		'LOINC' => 'http://bioportal.bioontology.org/ontologies/LOINC?p=classes&conceptid=',
 		'SNOMEDCT' => 'http://bioportal.bioontology.org/ontologies/SNOMEDCT?p=classes&conceptid='
 		);
-		
-	
+
+
 	// print "<pre>\n"; print_r ($_REQUEST); print "</pre>\n";
-	
+
 	// Make sure element ID is ok
 	if (! isset ($elementID) || ! ctype_digit($elementID)) {
 		print "Invalid ID or key\n";
@@ -31,7 +31,7 @@
 	if (! $row) {
 		print "Invalid ID or key\n";
 		exit (1);
-	}		
+	}
 	extract ($row);
 
 	// Action: DELETE
@@ -61,7 +61,7 @@
 		header ("Location: element-codes.php?id=$elementID&search=$search");
 		exit;
 	}
-	
+
 	// Display header info
 	print "<html>
 <head>
@@ -93,9 +93,9 @@
 	if (! isset ($search))  $search = $name;
 	$xsearch = htmlentities ($search);
 	$terms = annotate ($search);
-	
+
 	print "<p>&nbsp;</p>
-	
+
 <form method=POST action=element-codes.php>
 <input type=hidden name=action value=search>
 <input type=hidden name=id value=$elementID>
@@ -112,7 +112,7 @@
 <input type=hidden name=key value=\"$key\">
 <input type=hidden name=search value='$xsearch'>
 ";
-	
+
 	foreach ($terms as $n => $code_info) {
 		list ($system, $code, $display) = explode ('|', $code_info);
 		if (isset($indexcode["$system:$code"]))
@@ -125,7 +125,7 @@
 	if (count ($terms))
 		print "<input type=submit value='Add codes &gt;&gt;'>\n";
 	print "</form>\n";
-	
+
 
 	// Print footer
 	print "<p>&nbsp;</p>
@@ -134,35 +134,35 @@
 ";
 
 	exit;
-	
-	
+
+
 function annotate ($text) {
-	
+
 	$url = "http://data.bioontology.org/annotator?apikey=24e3df74-54e0-11e0-9d7b-005056aa3316"
-			. "&ontologies=RADLEX,LOINC,SNOMEDCT&longest_only=true&text=" 
+			. "&ontologies=RADLEX,LOINC,SNOMEDCT&longest_only=true&text="
 			. urlencode($text);
 
 	$lines = json_decode (file_get_contents ($url), true);
-	
+
 	$termlist = array ();
 	foreach ($lines as $line) {
 		$annot = $line ['annotatedClass'];
 		$code = getcode ($annot ['@id']);
 		$onto = getcode ($annot ['links']['ontology']);
 		$term = strtolower ($line ['annotations'][0]['text']);
-		$termlist [] = "$onto|$code|$term";		
+		$termlist [] = "$onto|$code|$term";
 	}
 
 	return ($termlist);
 }
 
 function getcode ($text) {
-	$y = explode ("#", $text); 
+	$y = explode ("#", $text);
 	if (strlen ($y[1]) > 0)
 		return ($y[1]);
-	
+
 	$x = explode ("/", $text);
 	return (array_pop($x));
 }
-	
+
 ?>

@@ -10,9 +10,9 @@
 	// Get parameters
 	extract ($_REQUEST);
 	$elementID = $id;
-	
+
 	print "<pre>\n"; print_r ($_REQUEST); print "</pre>\n";
-	
+
 	// Make sure element ID is ok
 	if (! isset ($elementID) || ! ctype_digit($elementID)) {
 		print "Invalid ID or key\n";
@@ -24,9 +24,9 @@
 	if (! $row) {
 		print "Invalid ID\n";
 		exit (1);
-	}		
-	extract ($row); 
-	
+	}
+	extract ($row);
+
 	// Update value list
 	if (isset ($key)) {
 		mysql_query ("DELETE FROM ElementValue WHERE elementID = $elementID")
@@ -44,7 +44,7 @@
 			}
 		}
 	}
- 
+
 	// Display header info
 	print "<html>
 <head>
@@ -119,6 +119,6 @@
 ";
 
 	exit;
-	
-	
+
+
 ?>

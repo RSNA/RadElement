@@ -11,26 +11,26 @@
 
 	$fields = array (
 		'name' => 'text',
-		'shortName' => 'text', 
-		'definition' => 'textarea', 
-		'valueType' => array ('boolean','date','integer','float','string','valueSet','set'), 
-		'valueMin' => 'number', 
-		'valueMax' => 'number', 
-		'stepValue' => 'number', 
-		'unit' => 'text', 		
-		'question' => 'textarea', 
-		'instructions' => 'textarea', 
-		'references' => 'text', 
-		'version' => 'text', 
-		'versionDate' => 'date', 
-		'synonyms' => 'text', 
-		'source' => 'text', 
-		'status' => array ('Draft','Proposed','Trial Use','Active','Retired'), 
+		'shortName' => 'text',
+		'definition' => 'textarea',
+		'valueType' => array ('boolean','date','integer','float','string','valueSet','set'),
+		'valueMin' => 'number',
+		'valueMax' => 'number',
+		'stepValue' => 'number',
+		'unit' => 'text',
+		'question' => 'textarea',
+		'instructions' => 'textarea',
+		'references' => 'text',
+		'version' => 'text',
+		'versionDate' => 'date',
+		'synonyms' => 'text',
+		'source' => 'text',
+		'status' => array ('Draft','Proposed','Trial Use','Active','Retired'),
 		'statusDate' => 'date'
 		);
-	
+
 	extract ($_REQUEST);
-	
+
 	// Display header info
 	print "<html>
 <head>
@@ -50,10 +50,10 @@
 ";
 		exit;
 	}
-	
+
 	// If ID is set, but there's no key, display current values
 	else if (! isset ($key)) {
-		
+
 		// Make sure ID is numeric and a valid element
 		if (! ctype_digit($id)) {
 			print "<form method=POST action=element-edit.php>
@@ -77,7 +77,7 @@
 ";
 			exit;
 		}
-		
+
 		print "<form method=POST action=element-edit.php>
 <table cellspacing=4>
 <tr><td align=right>&nbsp;</td><td>RDE$id</td></tr>
@@ -133,12 +133,12 @@
 ";
 		exit;
 	}
-	
-	
+
+
 	// Display values for valueSet element
 	if (strcmp($row['valueType'], 'valueSet') == 0) {
 		print "<br><h3><a href=element-values.php?id=$id>Values</a></h3>
-<ul>		
+<ul>
 ";
 		$result = mysql_query ("SELECT code, name FROM ElementValue
 								WHERE elementID = $id
