@@ -99,6 +99,18 @@
                         "SELECT * FROM ElementSetRef WHERE elementSetID = $id"));
         $response ['elements'] ['count'] = $numElements;
         $response ['elements'] ['url'] = ($numElements > 0 ? "$baseURL/sets/RDES$id/elements" : null);
+
+        $code_result = mysql_query (
+                       "SELECT system, code, display,
+                               CONCAT('$baseURL/codes/', system, '/', code) AS url
+                        FROM IndexCodeElementSetRef, IndexCode
+                        WHERE elementSetID = $id
+                        AND IndexCodeElementSetRef.codeID = IndexCode.id
+                        GROUP BY system, code");
+        while ($code_row = mysql_fetch_assoc ($code_result)) {
+            $codes [] = $code_row;
+        }
+        $response ['index_codes'] = $codes;
     }
 
     // Else (no set specified), list all top-level sets

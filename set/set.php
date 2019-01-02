@@ -1,34 +1,34 @@
 <?php
 /*
 	set/set.php
-	
+
 	RadElement -- Display set information
 	CEK 2016-05-15
 */
 
 	include ('../config/open_db.php');
-	
+
 	// Get element ID
 	extract ($_GET);
 	if (! isset ($id) || ! ctype_digit ($id)) {
 		header ("Location: /");
 		exit;
 	}
-	
+
 	$elementSetID = $id;
 	$result = mysql_query ("SELECT ElementSet.*, count(*) AS numElements
-							FROM ElementSet 
+							FROM ElementSet
 							LEFT JOIN ElementSetRef ON (ElementSet.id = elementSetID)
-							WHERE ElementSet.id = $elementSetID 
-							GROUP BY ElementSet.id") 
+							WHERE ElementSet.id = $elementSetID
+							GROUP BY ElementSet.id")
 		or die(mysql_error());
-		
+
 	if (mysql_num_rows ($result) == 0) {
 		header ("Location: /");
 		exit;
 	}
-	
-	
+
+
 	extract ($row = mysql_fetch_assoc ($result));
 
 ?>
@@ -42,7 +42,7 @@
 </head>
 
 <body>
-<?php 
+<?php
 include_once("../config/analyticstracking.php");
 echo $topbar;
 ?>
@@ -55,22 +55,22 @@ echo $topbar;
 <h2>$name</h2>
 <hr>
 <table>\n";
-	
+
 	// Display set attributes
 	print_info ('Description', $description);
-	print_info ('URL', ($url <> '' 
-		? "<a target=\"set\" href=\"$url\">$url</a>&nbsp;&nbsp;<img src=\"/images/linkout.png\">" 
+	print_info ('URL', ($url <> ''
+		? "<a target=\"set\" href=\"$url\">$url</a>&nbsp;&nbsp;<img src=\"/images/linkout.png\">"
 		: ''));
 	print_info ('Contact name', $contactName);
 	print_info ('Email', ($email <> '' ? "<a href=\"mailto:$email\">$email</a>&nbsp;<img src=\"/images/email.png\">" : ''));
 
-	// List parent sets	
+	// List parent sets
 	if ($parentID <> '') {
 		extract (mysql_fetch_assoc (mysql_query (
 			"SELECT name FROM ElementSet WHERE id = $parentID")));
 		print_info ("Parent set", "<a href=\"/set/RDES$parentID\">$name</a>");
 	}
-	
+
 	// List children sets
 	$result = mysql_query ("SELECT ElementSet.id, name, count(*) AS numElements
 								FROM ElementSet
@@ -85,7 +85,7 @@ echo $topbar;
 		}
 		print "</ul></td></tr>\n";
 	}
-	
+
 	// Display data elements
 	$result = mysql_query ("SELECT elementID, name
 								FROM ElementSetRef, Element
@@ -100,10 +100,27 @@ echo $topbar;
 		}
 		print "</ul></td></tr>\n";
 	}
-								
+	// Display indexing codes
+    $result = mysql_query (
+                "SELECT system, code, display, codeURL
+                 FROM IndexCodeElementSetRef, IndexCode, IndexCodeSystem
+                 WHERE IndexCodeElementSetRef.elementSetID = $elementSetID
+                 AND IndexCodeElementSetRef.codeID = IndexCode.id
+                 AND IndexCode.system = IndexCodeSystem.abbrev
+                 ORDER BY system, code") or die(mysql_error());
+    if (mysql_num_rows ($result) > 0) {
+        print "<tr><td>Index codes:</td><td>\n";
+        while ($row = mysql_fetch_assoc ($result)) {
+            extract ($row);
+            $href = preg_replace ('/\$code/', $code, $codeURL);
+            print "<a target=\"code\" href=\"$href\">$display &ndash; $system::$code</a>&nbsp;&nbsp;<img src=\"/images/linkout.png\"><br>\n";
+        }
+        print "</td></tr>\n";
+    }
+
 	print "</table>\n";
-	
-	
+
+
 ?>
 
 <?php  echo $footer; ?>
