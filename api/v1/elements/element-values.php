@@ -59,7 +59,7 @@
 		$valueResult = mysql_query (
 			"SELECT name, definition
 				FROM ElementValue
-				WHERE elementID = $id AND code = '$_param'
+				WHERE elementID = $id AND value = '$_param'
 				LIMIT 1");
 		$response = mysql_fetch_assoc ($valueResult);
 
@@ -96,8 +96,8 @@
 	else {
 		$allowedValue = array ();
 		$valueResult = mysql_query (
-				"SELECT code AS value, name,
-					CONCAT('$baseURL/elements/RDE$id/values/',code) AS url
+				"SELECT value, name,
+					CONCAT('$baseURL/elements/RDE$id/values/',value) AS url
 					FROM ElementValue
 					WHERE elementID = $id
 					ORDER BY id");

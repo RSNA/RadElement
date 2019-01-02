@@ -140,12 +140,12 @@
 		print "<br><h3><a href=element-values.php?id=$id>Values</a></h3>
 <ul>
 ";
-		$result = mysql_query ("SELECT code, name FROM ElementValue
+		$result = mysql_query ("SELECT value, name FROM ElementValue
 								WHERE elementID = $id
 								ORDER BY id");
 		while ($row = mysql_fetch_assoc ($result)) {
 			extract ($row);
-			print "<li>$code:&nbsp; $name</li>\n";
+			print "<li>$value:&nbsp; $name</li>\n";
 		}
 		print "</ul>\n";
 	}

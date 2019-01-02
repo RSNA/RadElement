@@ -247,7 +247,7 @@
                     FROM IndexCodeElementRef, Element, ElementValue
                     WHERE codeID = $codeID
                     AND IndexCodeElementRef.elementID = Element.id
-                    AND IndexCodeElementRef.valueCode = ElementValue.code
+                    AND IndexCodeElementRef.valueCode = ElementValue.value
                     AND IndexCodeElementRef.elementID = ElementValue.elementID
                     ORDER BY IndexCodeElementRef.elementID, IndexCodeElementRef.valueCode
                     LIMIT $limit OFFSET $offset")

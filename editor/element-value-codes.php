@@ -27,7 +27,7 @@
 
 	$row = mysql_fetch_assoc (mysql_query (
 			"SELECT * FROM ElementValue
-				WHERE elementID = $elementID AND code = '$valueCode' LIMIT 1"));
+				      WHERE elementID = $elementID AND value = '$valueCode' LIMIT 1"));
 	if (! $row) {
 		print "No such element &amp; value ($elementID/$valueCode)\n";
 		exit (1);

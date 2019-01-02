@@ -31,16 +31,13 @@
 	if (isset ($key)) {
 		mysql_query ("DELETE FROM ElementValue WHERE elementID = $elementID")
 			or die (mysql_error ());
-		// print "DELETE FROM ElementValue WHERE elementID = $elementID\n";	//-------------
 		foreach ($value_code as $i => $c) {
 			if ($c <> '') {
 				$c = mysql_real_escape_string ($c);
 				$n = mysql_real_escape_string ($value_name [$i]);
-				mysql_query ("INSERT INTO ElementValue (elementID, code, name)
-							VALUES ($elementID, '$c', '$n')")
+				mysql_query ("INSERT INTO ElementValue (elementID, value, name)
+							  VALUES ($elementID, '$c', '$n')")
 								or die (mysql_error());
-				// print "INSERT INTO ElementValue (elementID, code, name)
-							// VALUES ($elementID, '$c', '$n')\n";
 			}
 		}
 	}
@@ -59,13 +56,13 @@
 	$key = make_key();
 
 	$result = mysql_query (
-		"SELECT ElementValue.id AS valueID, ElementValue.code, ElementValue.name,
+		"SELECT ElementValue.id AS valueID, ElementValue.value, ElementValue.name,
 			GROUP_CONCAT(CONCAT(IndexCode.system,'::',IndexCode.code,' - ',IndexCode.display)
 							SEPARATOR '<br>') AS codelist
 			FROM ElementValue
 			LEFT JOIN (IndexCodeRef, IndexCode)
 				ON (IndexCodeRef.elementID = $elementID
-					AND IndexCodeRef.valueCode = ElementValue.code
+					AND IndexCodeRef.valueCode = ElementValue.value
 					AND IndexCodeRef.codeID = IndexCode.id)
 			WHERE ElementValue.elementID = $elementID
 			GROUP BY ElementValue.id");

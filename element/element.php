@@ -77,13 +77,38 @@ echo $topbar;
                 print "(0 - $valueMax value$s)\n";
             }
         }
+
+        $query = "SELECT ElementValue.id,
+                         ElementValue.value,
+                         ElementValue.name,
+                         GROUP_CONCAT(IndexCode.code SEPARATOR ',') as indexCodeList,
+                         GROUP_CONCAT(IndexCode.system SEPARATOR ',') as indexCodeSystemList,
+                         GROUP_CONCAT(IndexCodeSystem.codeURL SEPARATOR ',') as indexCodeSystemCodeURL
+                    FROM ElementValue
+                    LEFT JOIN IndexCode on ElementValue.value = IndexCode.display
+                    LEFT JOIN IndexCodeSystem on IndexCode.system = IndexCodeSystem.abbrev
+                    WHERE elementID = $elementID
+                    GROUP BY ElementValue.id
+                    ORDER BY ElementValue.id";
+
+        $valueResult = mysql_query ($query);
         print "<p><ul>\n";
-        $valueResult = mysql_query ("SELECT * FROM ElementValue
-                                              WHERE elementID = $elementID
-                                              ORDER BY id");
         while ($valueRow = mysql_fetch_assoc ($valueResult)) {
             extract ($valueRow);
-            print "<li>$code = $name</li>\n";
+            if (isset($indexCodeList)){
+                $codes = explode (',', $indexCodeList);
+                $systems = explode (',', $indexCodeSystemList);
+                $urls = explode (',', $indexCodeSystemCodeURL);
+                print "<li>$value = $name &nbsp;&nbsp;(";
+                for ($i = 0; $i < count($codes); $i++) {
+                    $href = preg_replace ('/\$code/', $codes[$i], $urls[$i]);
+                    print "<a href=\"$href\">$codes[$i]</a>";
+                    print ($i == count($codes) - 1 ? '' : ', ');
+                }
+                print ")</li>\n";
+            }
+            else
+                print "<li>$value = $name</li>\n";
         }
         print "</ul></p>\n";
     }

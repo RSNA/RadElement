@@ -91,7 +91,7 @@
                 $valueData['count']['max'] = $valueMax;
             $valueSet = array ();
             $valueResult = mysql_query (
-                "SELECT code AS value, name, definition, images
+                "SELECT value, name, definition, images
                     FROM ElementValue
                     WHERE elementID = $id
                     ORDER BY id");
