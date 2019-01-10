@@ -12,7 +12,9 @@ Create Database
 ===============
 `docker exec -it CONTAINER mysql -u root -p`
 
-Opens a mysql shell on the container
+Opens a mysql shell on the container.
+
+`create database radelement`
 
 Load Database
 =============
