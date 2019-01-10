@@ -38,11 +38,14 @@ $topbar = '<div class="topbar">
 
 
 $footer = '<footer>
-<!-- <p class="copyright">Copyright (c) Radiological Society of North America.  ALL RIGHTS RESERVED.</p> -->
-<div align="left" style="float:left " >
-<a href="http://www.rsna.org/" target="_blank">
- <img src="/images/rsna_informatics.png" border="0"/></a>
-</div>
+<p class="copyright">
+  <a href="http://www.rsna.org/" target="_blank">
+    <img src="/images/RSNA_Logo_NoName-100px.png" border="0"/>
+  </a>
+  <a href="https://www.acr.org/" target="_blank">
+    <img src="/images/acr_logo_tagline-100px.png" border="0"/>
+  </a>
+</p>
 </footer>';
 
 ?>
