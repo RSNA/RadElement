@@ -1,0 +1,5 @@
+config/open_db.php
+.*
+!.htaccess
+!/.gitignore
+!/.travis.yml
