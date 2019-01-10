@@ -1,6 +1,12 @@
-Readme.md
+Radelement
+==========
+Source code repository for the radelement web page + database
 
-docker-compose up
+Local Development
+=================
+We include a basic docker-compose setup for local development which can be started with:
+
+`docker-compose up`
 
 Create Database
 ===============
@@ -10,5 +16,8 @@ Opens a mysql shell on the container
 
 Load Database
 =============
-`docker exec -i CONTAINER mysql -u root --password=radelement radelement < ./2018-09-10-radelement.sql`
+`docker exec -i CONTAINER mysql -u root --password=radelement radelement < ./sqlfile.sql`
 
+Edit open_db.php
+================
+The db configuration file for the php scripts will need to be edited for your purposes.
