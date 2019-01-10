@@ -1,10 +1,11 @@
 <?php
 	$dbname = "radelement";
 	$host = "localhost";
-	$user = "root";
+	$user = "fill_me_in";
+    $password = "fill_me_in";
 
 
-	$dbh = mysql_connect ($host,$user,"")
+	$dbh = mysql_connect ($host,$user,$password)
 		or die ('Cannot connect to database: ' . mysql_error(). '');
 	mysql_select_db ($dbname)
 		or die ('Cannot select database: ' . mysql_error());
